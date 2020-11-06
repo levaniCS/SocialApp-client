@@ -38,7 +38,7 @@ const PostForm = () => {
       <Form onSubmit={onSubmit}>
         <h2>Create a post:</h2>
           <Form.Field>
-            <Form.Input 
+            <Form.TextArea 
               type="text"
               placeholder="Hi, world!"
               name="body"
@@ -46,7 +46,7 @@ const PostForm = () => {
               values={values.body}
               error={error ? true : false}
             />
-            <Button type="submit" color="teal">Submit</Button>
+            <Button style={{ marginBottom: 20}} type="submit" color="teal">Submit</Button>
           </Form.Field>
       </Form>
       {error && (
