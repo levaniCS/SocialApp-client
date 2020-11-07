@@ -29,11 +29,11 @@ const PostCard = ({post: { body, createdAt, id , username, likeCount, commentCou
           inverted
           content="Comment on Post"
           trigger={
-            <Button labelPosition='right'  as={Link} to={`/posts/${id}`}>
-              <Button basic color='blue'>
+            <Button labelPosition='right' as={Link} to={`/posts/${id}`}>
+              <Button basic color='blue' >
                 <Icon name='comments' />
               </Button>
-              <Label as={Link} to={`/comments/${id}`} basic color='blue' pointing='left'>
+              <Label basic color='blue' pointing='left'>
                 {commentCount}
               </Label>
             </Button>
