@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import ReactGA from 'react-ga'
 import { Container } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
@@ -15,6 +16,14 @@ import Register from './pages/Register'
 import SinglePost from './pages/SinglePost'
 
 function App() {
+
+  useEffect(() => {
+    ReactGA.initialize('G-P3FS3Q5XGC')
+    // Report page view
+    ReactGA.pageview(window.location.pathname + window.location.search)
+  }, [])
+
+
   return (
     <AuthProvider>
       <Router>
