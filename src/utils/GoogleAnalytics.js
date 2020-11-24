@@ -11,7 +11,7 @@ const analyticsEvent = (category = '', action, label = '') => {
 }
 
 const trackPage = () => {
-  ReactGA.initialize(ANALYTICS_ID)
+  ReactGA.initialize(ANALYTICS_ID, { redactEmail: false })
   // Report page view
   ReactGA.set({ page: window.location.pathname })
   ReactGA.pageview(window.location.search)
