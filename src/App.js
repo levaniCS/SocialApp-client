@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     ReactGA.initialize('G-JG9CNQL7G7')
     // Report page view
-    ReactGA.pageview(window.location.pathname + window.location.search)
+    ReactGA.pageview('/')
   }, [])
 
 
