@@ -18,9 +18,9 @@ import SinglePost from './pages/SinglePost'
 function App() {
 
   useEffect(() => {
-    ReactGA.initialize('G-JG9CNQL7G7')
+    ReactGA.initialize('UA-145282946-2')
     // Report page view
-    ReactGA.pageview('/')
+    ReactGA.pageview(window.location.pathname + window.location.search)
   }, [])
 
 
