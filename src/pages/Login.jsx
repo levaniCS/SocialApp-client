@@ -21,7 +21,7 @@ const Login = (props) => {
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, {data: { login: userData }}) {
       context.login(userData)
-      AnalyticUtils.analyticsEvent('User', 'SIGN IN', `User ${userData.username} with email: ${userData.email} made Sign in!`)
+      AnalyticUtils.analyticsEvent('User', `${userData.username} made Sign in!`, `email: ${userData.email}`)
       props.history.push('/')
     },
     onError(err){
