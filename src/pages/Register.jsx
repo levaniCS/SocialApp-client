@@ -23,7 +23,7 @@ const Register = (props) => {
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, {data: { register: userData }}) {
       context.login(userData)
-      AnalyticUtils.analyticsEvent('Auth', `${userData.username} made Sign Up!`, `email: ${userData.email}`)
+      AnalyticUtils.analyticsEvent('User', `${userData.username} made Sign Up!`, `email: ${userData.email}`)
       props.history.push('/')
     },
     onError(err){
