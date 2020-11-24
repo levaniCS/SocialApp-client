@@ -7,6 +7,8 @@ import gql from 'graphql-tag'
 import { AuthContext } from '../context/auth'
 import { useForm } from '../utils/hooks'
 
+import AnalyticUtils from '../utils/GoogleAnalytics'
+
 const Register = (props) => {
   const context = useContext(AuthContext)
   const [errors, setErrors] = useState({})
@@ -21,6 +23,7 @@ const Register = (props) => {
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, {data: { register: userData }}) {
       context.login(userData)
+      AnalyticUtils.analyticsEvent('User', 'SIGN Up', `User ${userData.username} with email: ${userData.email} made Sign Up!`)
       props.history.push('/')
     },
     onError(err){

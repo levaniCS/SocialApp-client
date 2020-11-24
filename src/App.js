@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import ReactGA from 'react-ga'
 import { Container } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
@@ -15,12 +14,13 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import SinglePost from './pages/SinglePost'
 
+// Google Analytics
+import AnalyticUtils from './utils/GoogleAnalytics'
+
 function App() {
 
   useEffect(() => {
-    ReactGA.initialize('UA-145282946-2')
-    // Report page view
-    ReactGA.pageview(window.location.pathname + window.location.search)
+    AnalyticUtils.trackPage()
   }, [])
 
 
