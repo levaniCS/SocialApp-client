@@ -11,7 +11,7 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import App from './App'
 
 const httpUri = process.env.NODE_ENV === 'production' ? 'https://warm-bastion-27092.herokuapp.com/' : 'http://localhost:4000/'
-const wsUri = process.env.NODE_ENV === 'production' ? 'ws://warm-bastion-27092.herokuapp.com/' : 'ws://localhost:4000/graphql'
+const wsUri = process.env.NODE_ENV === 'production' ? 'wss://warm-bastion-27092.herokuapp.com/' : 'ws://localhost:4000/graphql'
 
 
 const wsLink  = new WebSocketLink({
