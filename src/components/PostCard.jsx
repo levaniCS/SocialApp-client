@@ -20,7 +20,7 @@ const PostCard = ({post: { body, createdAt, id , username, likeCount, commentCou
         />
         <Card.Header>{username}</Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
-        <Card.Description style={{ wordBreak: 'break-all'}}>{body}</Card.Description>
+        <Card.Description className="line-clamp" style={{ wordBreak: 'break-all', lineClamp: 3}}>{body}</Card.Description>
       </Card.Content>
 
       <Card.Content extra textAlign='center'>
