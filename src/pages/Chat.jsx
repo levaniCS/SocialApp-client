@@ -83,13 +83,13 @@ const ChatPage = () => {
   }
   
   return (
-    <Grid style={{ position: 'relative'}}>
-      <Grid.Row style={{ height: '85vh', overflowY: 'scroll' }}>
+    <Grid style={{ position: 'relative', padding: '0 1rem !important' }}>
+      <Grid.Row style={{ overflowY: 'scroll', height: '85vh' }}>
         <Messages username={state.username} />
       </Grid.Row>
-      <Grid.Row style={{ justifyContent: 'center' }}>
+      <Grid.Row style={{ justifyContent: 'center', position: 'fixed', bottom: 0 }}>
         <Form>
-          <div style={{ width: 400, padding: '0 1rem' }} className="ui action input fluid">
+          <div style={{ width: 400, padding: '0 1rem 0 0' }} className="ui action input fluid">
             <input 
               type="text" 
               placeholder="username..." 
