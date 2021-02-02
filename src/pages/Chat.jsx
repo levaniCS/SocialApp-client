@@ -1,5 +1,6 @@
-import React, { useState, useContext } from 'react'
-import { Grid, Message, Form } from 'semantic-ui-react'
+/* eslint-disable no-unused-expressions */
+import React, { useState, useContext, useRef, useEffect } from 'react'
+import { Grid, Message, Form, Button, Icon } from 'semantic-ui-react'
 import moment from 'moment'
 
 import { useMutation, useSubscription } from '@apollo/react-hooks'
@@ -9,20 +10,34 @@ import { AuthContext } from '../context/auth'
 
 const Messages = ({ username }) => {
   const  { data } = useSubscription(SUBSCRIBE_MESSAGES)
+  const messagesEndRef = useRef(null)
+
+  useEffect(() => {
+    if(messagesEndRef?.current) {
+      scrollToBottom()
+    }
+  }, [data])
 
   if(!data || data.newMessages.length === 0) return <div>Messages Not Found</div>
   
   const messages = data.newMessages
+
+
+  function scrollToBottom(){
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
+  }
+
   
   return (
-    <div style={{ width: '95%', margin: '3rem auto' }}>
+    <div ref={messagesEndRef}  style={{ width: '90%', margin: '4rem auto', padding: '0 1rem' }}>
+      <h1>Global Chat</h1>
       {messages.map(({id, username: currentUser, content, createdAt}) => (
         <div key={id} style={{
           display: 'grid',
           justifyItems: `${currentUser === username ? 'end' : 'start'}`
         }}>
           <div style={{ color: 'gray' }}>{currentUser}</div>
-          <small>{moment(createdAt).fromNow(true)}</small>
+          <small style={{ whiteSpace: 'nowrap' }}>{moment(createdAt).fromNow(true)}</small>
           <Message
             as='span'
             floating
@@ -37,8 +52,9 @@ const Messages = ({ username }) => {
 }
 
 
-const ChatPage = (props) => {
+const ChatPage = () => {
   const { user } = useContext(AuthContext)
+
 
   const [state, setState] = useState({
     username: user.username,
@@ -68,12 +84,12 @@ const ChatPage = (props) => {
   
   return (
     <Grid style={{ position: 'relative'}}>
-      <Grid.Row>
+      <Grid.Row style={{ height: '85vh', overflowY: 'scroll' }}>
         <Messages username={state.username} />
       </Grid.Row>
-      <Grid.Row style={{ position: 'fixed', bottom: 0, justifyContent: 'center' }}>
+      <Grid.Row style={{ justifyContent: 'center' }}>
         <Form>
-          <div style={{ width: 400 }} className="ui action input fluid">
+          <div style={{ width: 400, padding: '0 1rem' }} className="ui action input fluid">
             <input 
               type="text" 
               placeholder="username..." 
@@ -82,20 +98,25 @@ const ChatPage = (props) => {
               value={state.username}
               onChange={handleChange}
             />
-            <input 
+            <input
               type="text" 
-              placeholder="content..." 
+              placeholder="Type something..." 
               name="content" 
               value={state.content}
               onChange={handleChange}
               onKeyPress={handleKeyUp}
             />
-            <button 
-              type="submit" 
-              className="ui button teal"
+            <Button
+              color="twitter"
+              animated='vertical' 
+              onClick={sendMessage} 
               disabled={state.content.trim() === ''}
-              onClick={sendMessage}
-            >Send</button>
+            >
+              <Button.Content hidden>Send</Button.Content>
+              <Button.Content visible>
+                <Icon name='paper plane' />
+              </Button.Content>
+            </Button>
           </div>
         </Form>
       </Grid.Row>
